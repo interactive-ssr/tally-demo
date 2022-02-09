@@ -1,0 +1,30 @@
+networks:
+  shared:
+    name: shared
+
+services:
+  example:
+    build: .
+    networks:
+      - shared
+    ports:
+      - 8080:8080
+  issr:
+    depends_on:
+      - redis
+    image: charje/issr-server
+    environment:
+      ISSR_APPLICATION: example:8080
+      ISSR_REDIS_DESTINATION: redis:6379
+      ISSR_REDIS_PASSWORD: examplepassword
+    networks:
+      - shared
+    ports:
+      - 3000:3000
+  redis:
+    image: redis
+    command: redis-server --requirepass examplepassword
+    networks:
+      - shared
+    ports:
+      - 6379:6379
