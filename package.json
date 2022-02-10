@@ -8,14 +8,23 @@
     "clean": "rm -r dist/*",
     "start": "npm run compile && node dist/index.js"
   },
-  "keywords": ["issr", "jsx", "server-side", "rending", "interactive"],
+  "keywords": [
+    "issr",
+    "jsx",
+    "server-side",
+    "rending",
+    "interactive"
+  ],
   "author": "Charles Jackson <charles.b.jackson@protonmail.com>",
   "license": "GPL-3.0",
   "dependencies": {
     "@babel/cli": "^7.17.0",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-react-jsx": "^7.16.7",
+    "cookie-parser": "^1.4.6",
+    "crypto": "^1.0.1",
     "express": "^4.17.2",
+    "express-session": "^1.17.2",
     "preact": "^10.6.5",
     "preact-render-to-string": "^5.1.19"
   }
