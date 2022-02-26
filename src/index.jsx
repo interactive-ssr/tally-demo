@@ -33,21 +33,30 @@ function NaturalNumbersList ({end}) {
          </ul>
 }
 
+function renderPage (markup) {
+  return "<!doctype html>" + render(markup)
+}
+
 app.all("/tally", (req, res) => {
   let args = {...req.query, ...req.body}
   let x = req.session.x || 0
   if (args.addx) x += 1
   if (args.subx) x = Math.max(0, x - 1)
   req.session.x = x
-  
-  res.send(render(
-    <body>
-      <link rel="stylesheet" href="tally.css"/>
-      <h1>Tally</h1>
-      <button onclick="rr(this)" action="addx">+</button>
-      <button onclick="rr(this)" action="subx">-</button>
-      <NaturalNumbersList end={x} />
-    </body>
+
+  res.send(renderPage(
+    <html>
+      <head>
+        <link rel="stylesheet" href="tally.css"/>
+        <title>Tally Demo</title>
+      </head>
+      <body>
+        <h1>Tally</h1>
+        <button onclick="rr(this)" action="addx">+</button>
+        <button onclick="rr(this)" action="subx">-</button>
+        <NaturalNumbersList end={x} />
+      </body>
+    </html>
   ))
 })
 
